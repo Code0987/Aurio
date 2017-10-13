@@ -463,13 +463,13 @@ ProxyInstance *stream_open(ProxyInstance *pi)
 		/* Initialize video frame converter */
 		// PIX_FMT_BGR24 format needed by C# for correct color interpretation (PixelFormat.Format24bppRgb)
 		pi->sws = sws_getContext(pi->video_codec_ctx->width, pi->video_codec_ctx->height, pi->video_codec_ctx->pix_fmt, 
-			pi->video_codec_ctx->width, pi->video_codec_ctx->height, PIX_FMT_BGR24, SWS_BICUBIC, NULL, NULL, NULL);
+			pi->video_codec_ctx->width, pi->video_codec_ctx->height, AV_PIX_FMT_BGR24, SWS_BICUBIC, NULL, NULL, NULL);
 		if (pi->sws == NULL) {
 			fprintf(stderr, "error creating swscontext\n");
 			exit(1);
 		}
 
-		if (avpicture_alloc(&pi->video_picture, PIX_FMT_RGB24, pi->video_codec_ctx->width, pi->video_codec_ctx->height) != 0) {
+		if (avpicture_alloc(&pi->video_picture, AV_PIX_FMT_RGB24, pi->video_codec_ctx->width, pi->video_codec_ctx->height) != 0) {
 			fprintf(stderr, "error allocating AVPicture\n");
 			exit(1);
 		}
